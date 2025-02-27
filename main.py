@@ -70,7 +70,7 @@ def main():
     </div>
     """
     m.get_root().html.add_child(folium.Element(legend_html))
-    m.save("idaho_overlay.html")
+    m.save("index.html")
     print("Saved Idaho overlay map.")
 
 if __name__ == "__main__":
