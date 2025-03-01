@@ -10,6 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from rasterio.mask import mask
 from folium.raster_layers import ImageOverlay
+from folium.plugins import Geocoder
 import geopandas as gpd
 from shapely.geometry import mapping
 from PIL import Image
@@ -54,6 +55,10 @@ def main():
     openstreetmap = folium.TileLayer('OpenStreetMap', name='OpenStreetMap')
     openstreetmap.add_to(m)
     esri_street_map.add_to(m)
+    Geocoder(
+        position="topleft",
+        zoom=8
+    ).add_to(m)
     ImageOverlay(
         image=image_path,
         bounds=bounds,
