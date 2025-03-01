@@ -48,13 +48,17 @@ def main():
     m = folium.Map(
         location=[44.0682, -114.742],
         zoom_start=6,
-        tiles="Cartodb Positron",
-        attr=""
+        tiles=None
     )
+    esri_street_map = folium.TileLayer("Esri.WorldStreetMap", name="Esri World Street Map")
+    openstreetmap = folium.TileLayer('OpenStreetMap', name='OpenStreetMap')
+    openstreetmap.add_to(m)
+    esri_street_map.add_to(m)
     ImageOverlay(
         image=image_path,
         bounds=bounds,
-        opacity=0.4
+        opacity=0.5,
+        name="Idaho Climate Overlay"
     ).add_to(m)
     legend_html = """
     <div style="position: fixed; 
@@ -70,6 +74,7 @@ def main():
     </div>
     """
     m.get_root().html.add_child(folium.Element(legend_html))
+    folium.LayerControl().add_to(m)
     m.save("index.html")
     print("Saved Idaho overlay map.")
 
